@@ -15,8 +15,7 @@ app.use(cors());
 const port =7777;
 
 
-app.use('/dishes', DishesRouter); // Add dishes route
-
+app.use('/dishes', DishesRouter); 
 app.get('/', (req, res) => {
     res.json({ message: "Welcome" });
 });

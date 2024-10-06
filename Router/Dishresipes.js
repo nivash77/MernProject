@@ -13,24 +13,20 @@ router.get('/all', async (req, res) => {
         res.status(500).json({ message: "Error retrieving dishes", error });
     }
 });
-
-// Add a new dish
 router.post('/add', async (req, res) => {
     try {
-        const newDish = new Dish(req.body);
+        const dishes = req.body; // Expecting an array of dishes
         
-        const { name } = newDish;
-        if (!name) {
-            return res.status(400).json({ message: "Name is required" });
+        if (!Array.isArray(dishes) || dishes.length === 0) {
+            return res.status(400).json({ message: "At least one dish is required" });
         }
 
-        const savedData = await newDish.save();
-        return res.status(201).json(savedData);
+        const savedDishes = await Dish.insertMany(dishes); // Insert multiple dishes
+        return res.status(201).json(savedDishes);
     } catch (error) {
-        return res.status(500).json({ message: "Error saving dish", error });
+        return res.status(500).json({ message: "Error saving dishes", error });
     }
 });
-
 router.get('/:name/recipes', async (req, res) => {
     try {
         const dishName = req.params.name;
