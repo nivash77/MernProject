@@ -5,17 +5,16 @@ const cors = require('cors');
 const dbconn = require('./config/db'); // Ensure DB connection is established
 
 // Import routers
-const ProjectsRouter = require('./routes/ProjectRouter');
-const DishesRouter = require('./routes/DishRouter');
+
+const DishesRouter = require('./Router/Dishresipes');
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-const port = process.env.PORT || 7778;
+const port =7777;
 
-// Set up routes
-app.use('/projects', ProjectsRouter);
+
 app.use('/dishes', DishesRouter); // Add dishes route
 
 app.get('/', (req, res) => {
