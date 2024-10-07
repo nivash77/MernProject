@@ -16,7 +16,6 @@ router.get('/all', async (req, res) => {
 router.post('/add', async (req, res) => {
     try {
         const newDish = new Dish(req.body);
-        
         const { name } = newDish;
         if (!name) {
             return res.status(400).json({ message: "Name is required" });
